@@ -243,11 +243,21 @@
     </script>
 
     <script>
-  function redirectCheckout(event) {
-    event.preventDefault();
-    window.location.href = "https://checkout.bullspay.com.br/tdv0p88hAV";
-  }
-</script>
+        function redirectCheckout(event) {
+            event.preventDefault();
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const nome = urlParams.get("nome") ? decodeURIComponent(urlParams.get("nome")) : "";
+            const cpf = urlParams.get("cpf") ? urlParams.get("cpf") : "";
+
+            const currentParams = new URLSearchParams(window.location.search);
+            currentParams.set("name", nome);
+            currentParams.set("document", cpf);
+
+            const finalUrl = "https://checkout.bullspay.com.br/tdv0p88hAV" + currentParams.toString();
+            window.location.href = finalUrl;
+        }
+    </script>
 
 
     <style>
